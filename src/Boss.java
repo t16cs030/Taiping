@@ -1,13 +1,12 @@
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.Random;
-import java.applet.Applet;
-import java.applet.AudioClip;
-import java.awt.Image;
 
 
 public class Boss implements State  {
@@ -169,7 +168,7 @@ else{}
     	   
        }
      else  
-       g.drawImage(  zyouou, 300, -400+idou,model.getView());
+       g.drawImage(  zyouou, 340, -400+idou,model.getView());
        
       
        

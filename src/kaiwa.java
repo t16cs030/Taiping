@@ -169,19 +169,19 @@ public class kaiwa implements State  {
 		  nameflag=1;}
 		  
 		  if(model.i==4||model.i==6||model.i==8||model.i==11||model.i==12||model.i==14||model.i==15||model.i==16||model.i==17||model.i==19||model.i==23||model.i==25){
-			  g.drawImage(  bousi, 600, 250,model.getView());
+			  g.drawImage(  bousi, 680, 240,model.getView());
 		  g.drawImage(  arisukuro, 0, 300,model.getView());
 		  nameflag=2;}
 		  
 		  if(model.i==5||model.i==7||model.i==10||model.i==13||model.i==18||model.i==20||model.i==22||model.i==24||model.i==26){
-		  g.drawImage(  bousikuro, 600, 250,model.getView());
+		  g.drawImage(  bousikuro, 680, 240,model.getView());
 		  g.drawImage(  arisu, 0, 300,model.getView());
 		  nameflag=1;}
 		  if(model.i==27)
 			  nameflag=0;
 		  
 		  if(model.i==9||model.i==21){
-			  g.drawImage(  bousikuro, 600, 250,model.getView());
+			  g.drawImage(  bousikuro, 680, 240,model.getView());
 		  g.drawImage(  arisukuro, 0, 300,model.getView());
 	nameflag=0;}
 		 

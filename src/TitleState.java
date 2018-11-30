@@ -68,14 +68,14 @@ public class TitleState implements State  {
 		 g.drawImage( haikei, -70, 0,model.getView());
 		 g.drawImage( ansd, 320, 605,model.getView());
 			  if(time%2==0){
-				  g.drawString("〜Push Enter〜",455,665);}
+				  g.drawString("〜Push Enter〜",455,670);}
 			  else {
 
-		 g.drawString("〜Push Enter〜",455,655);
+		 g.drawString("〜Push Enter〜",455,660);
 
 		}
 				g.setFont(new Font(Font.SERIF , Font.BOLD, 21));
-				 g.drawString("3次元のボスが来たらスペースキーを押してね",373,693);
+				 g.drawString("3次元のボスが来たらスペースキーを押してね",373,694);
 }
 
 

@@ -32,9 +32,9 @@ public class RecordState implements State  {
 		Rank();
 		godend.play();
 	}
-	
+
 	public void processTimeElapsed(int msec){
-		
+
 	}
 
 	public State process(String event) {
@@ -59,29 +59,29 @@ public class RecordState implements State  {
        }
        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 60));
        g.drawString(""+model.score, 654, 755);
-		} 
-	
-	
-	
+		}
+
+
+
 	public void setRanking(){
 		String r=""+model.getScore();
 		try{
-			File file=new File("../taiping/ranking.txt");
+			File file=new File("../Taiping_no_Alice/ranking.txt");
 					PrintWriter printwriter=new PrintWriter(new BufferedWriter(new FileWriter(file,true)));
 					printwriter.println(r);
 					printwriter.close();
-					
+
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public void Sort(){
 		Collections.sort(rank ,Collections.reverseOrder());
 	}
 	public void Rank(){
-		File file=new File("../taiping/ranking.txt");
+		File file=new File("../Taiping_no_Alice/ranking.txt");
 		if(!file.exists()){
 			return;
 		}
@@ -99,5 +99,5 @@ public class RecordState implements State  {
 		}
 		Sort();
 	}
-	
+
 }
