@@ -66,7 +66,7 @@ public class RecordState implements State  {
 	public void setRanking(){
 		String r=""+model.getScore();
 		try{
-			File file=new File("../Taiping_no_Alice/ranking.txt");
+			File file=new File("ranking.txt");
 					PrintWriter printwriter=new PrintWriter(new BufferedWriter(new FileWriter(file,true)));
 					printwriter.println(r);
 					printwriter.close();
@@ -81,7 +81,7 @@ public class RecordState implements State  {
 		Collections.sort(rank ,Collections.reverseOrder());
 	}
 	public void Rank(){
-		File file=new File("../Taiping_no_Alice/ranking.txt");
+		File file=new File("ranking.txt");
 		if(!file.exists()){
 			return;
 		}

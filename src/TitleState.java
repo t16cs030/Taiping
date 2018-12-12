@@ -50,10 +50,10 @@ public class TitleState implements State  {
 			 title.stop();
 
 
-		//	 return new RecordState(model);
-		//	 return new Boss(model);
+		// return new RecordState(model);
+	//		 return new Boss(model);
        return new kaiwa(model);
-			//return new Boss(model);
+
 			//return new PlayingState(model);
 		}
 		else if(event.charAt(0) == ' '){
