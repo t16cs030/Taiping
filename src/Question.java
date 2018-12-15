@@ -6,17 +6,28 @@ public class Question {
 	private String sora[]= new String[7];
 	private String riku[]= new String[7];
 
+	private String Jsora[]= new String[7];
+	private String Jriku[]= new String[7];
+
+
 	private String question;
+	private String Jquestion;
 
 	Random rand=new Random();
 
 	public Question(int qnum, int direction) {
 		mondai();
-	if(direction <= 2)
+	if(direction <= 2) {
 		question =  sora[qnum];
-	else
+	Jquestion =  Jsora[qnum];}
+
+	else {
 		question =  riku[qnum];
+		Jquestion =  Jriku[qnum];
+	}
     }
+
+
 
 public void mondai(){
 	sora[0]="kawaiitori";
@@ -38,9 +49,32 @@ public void mondai(){
 
 }
 
+public void japanese(){
+	Jsora[0]="かわいいとり";
+	Jsora[1]="ブンブンばち";
+	Jsora[2]="アイスモンスター";
+	Jsora[3]="ジードラゴン";
+	Jsora[4]="飛ぶきんぎょ";
+	Jsora[5]="はとポッポ";
+	Jsora[6]="回復";
+
+
+	Jriku[0]="こんちゅう";
+	Jriku[1]="スパイダーマン";
+	Jriku[2]="バースデイ";
+	Jriku[3]="トランプ";
+	Jriku[4]="まじゅつ";
+	Jriku[5]="マンドラゴ";
+	Jriku[6]="ミスタークッキー";
+
+}
+
 public String getQuestion(){
 		return question;
 
 }
+public String getJAPANESE(){
+	return Jquestion;
 
+}
 }
