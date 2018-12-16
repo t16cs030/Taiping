@@ -9,10 +9,14 @@ public class Model {
 	private Controller controller;
 	AudioClip st;
 
+
+
 	int score;
 	int i;//kaiwaで使用。Modelで管理しないと、PlayState終わった後にiの情報がリセットされるから
 
 	private String typedChar = "";
+
+
 
 	private int mx, my;
 	int hp;

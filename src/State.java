@@ -7,3 +7,5 @@ public interface State {
 
 	public void paint(Graphics g);
 }
+
+

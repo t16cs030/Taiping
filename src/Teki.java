@@ -7,13 +7,19 @@ public class Teki {
 	private int tekiidou;//敵の近さ
 	private int qnum;
 	private Question question;
+	private Question japanese;
 	private Image image;
+
+
 
 	public Teki(int direction, int qnum) {
 		tekiidou = 0;
 		this.direction = direction;
 		this.qnum = qnum;
 		question = new Question(qnum, direction);
+
+		Question.soraText.get(2);
+
 		readImg();
 	}
 
@@ -21,9 +27,6 @@ public class Teki {
 		return question.getQuestion();
 	}
 
-	public String getJapanese() {
-		return question.getQuestion();
-	}
 
 	public void update() {
 		tekiidou++;
@@ -36,6 +39,7 @@ public class Teki {
 	public int getDirection() {
 		return direction;
 	}
+
 
 	private void readImg() {
 		switch (direction) {

@@ -19,6 +19,7 @@ public class Badend implements State {
 		bad.play();
 	}
 
+
 	public void processTimeElapsed(int msec) {
 
 	}
@@ -41,3 +42,4 @@ public class Badend implements State {
 
 	}
 }
+
