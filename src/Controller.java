@@ -13,6 +13,8 @@ public class Controller implements ActionListener, KeyListener, MouseListener {
 	private Model model;
 	private Timer timer;
 
+
+
 	public Controller(Model model) {
 		// モデルを保持（イベントの通知先）
 		this.model = model;

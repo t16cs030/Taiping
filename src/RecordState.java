@@ -31,6 +31,8 @@ public class RecordState implements State {
 		godend.play();
 	}
 
+
+
 	public void processTimeElapsed(int msec) {
 
 	}

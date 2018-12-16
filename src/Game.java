@@ -10,6 +10,8 @@ public class Game extends JFrame {
 
 	private Model model = null;
 
+
+
 	public Game() {
 		// Window タイトルの設定
 		setTitle("GUI Sample");

@@ -30,3 +30,4 @@ public class BossCome implements State {
 		g.drawImage(boss, 0, 0, model.getView());
 	}
 }
+

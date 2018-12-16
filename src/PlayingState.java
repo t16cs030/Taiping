@@ -12,6 +12,7 @@ public class PlayingState implements State {
 	private Model model;
 	private Teki enemy;
 	private LinkedList<Teki> enemys;
+	private Question question;
 
 	String yourAnswer;
 
@@ -51,6 +52,12 @@ public class PlayingState implements State {
 	private AudioClip miss;
 	private AudioClip kirikae;
 	private AudioClip tekikougeki;
+	int Japanese1 = 0;
+	int Japanese2 = 0;
+	int Japanese3 = 0;
+	int Japanese4 = 0;
+	int drawRed = 0;//赤文字のフラグ
+	int countRed[] = { 0, 0, 0, 0, 0 };//何文字赤文字か
 
 	public PlayingState(Model model) {
 		this.model = model;
@@ -108,7 +115,10 @@ public class PlayingState implements State {
 			return new BossCome(this, model);
 		} else if (event.charAt(0) == 'E') {//ansのTrue、Falseは同じ名前の敵をいっぺんに殺さないようにする
 
+			yourAnswer = okikae(yourAnswer);
+
 			for (Teki teki : enemys) {
+				(teki.getQuestion()).trim();
 				if (yourAnswer.equals(teki.getQuestion())) {//正解だったらenemyに追加しないで、間違ってたらする
 					if ((gunFlag == 2 && teki.getDirection() <= 2) || (gunFlag == 1 && teki.getDirection() > 2)) {//銃モードが違う
 						tyuui = 1;//注意フラグたつ
@@ -165,7 +175,8 @@ public class PlayingState implements State {
 				kirikae.play();
 				sound = 1;
 			}
-			yourAnswer = "";
+
+			resetAnswer();
 			if (sound != 1)
 				miss.play();
 			sound = 0;
@@ -174,7 +185,7 @@ public class PlayingState implements State {
 		else if (event.charAt(0) == 'B') {//バックスペース押した。この処理しないとBossComから戻った時Answerに空欄が追加される
 
 			if (yourAnswer.isEmpty()) {
-				yourAnswer = "";
+				resetAnswer();
 			} else {
 				int nagasa = yourAnswer.length();
 				String okikaeAto = yourAnswer.substring(0, nagasa - 1);
@@ -183,12 +194,43 @@ public class PlayingState implements State {
 		}
 
 		else {
-			if (yourAnswer.length() <= 10)
+			if (yourAnswer.length() <= 14) {
+
 				yourAnswer += event;
-			else {
+				String tmpYourAnswer = okikae(yourAnswer);
+				for (Teki teki : enemys) {
+					int length = tmpYourAnswer.length() < teki.getQuestion().length() ? tmpYourAnswer.length()
+							: teki.getQuestion().length();
+					//System.out.println("lengthhhhhhhhh:" + length);
+					for (int m = 0; m < length; m++) {
+
+						if ((tmpYourAnswer.charAt(m)) == ((teki.getQuestion().charAt(m)))) {
+//							countRed[teki.getDirection()] = tmpYourAnswer.length();
+							if ((gunFlag == 1 && teki.getDirection() <= 2) || (gunFlag == 2 && teki.getDirection() > 2)) {
+							countRed[teki.getDirection()] = m+1;}
+						} else {
+							break;
+						}
+
+					}
+				}
+
+
+
+
+
+			} else {
 			}
 		}
 		return this;
+
+	}
+
+	public void resetAnswer() {
+		yourAnswer = "";
+		for (int i = 0; i < countRed.length; i++) {
+			countRed[i] = 0;
+		}
 
 	}
 
@@ -214,6 +256,19 @@ public class PlayingState implements State {
 			if (tekiflag == 1) {
 				tekitime = 0;
 				enemys.add(new Teki(a, b));//( direction,  qnum)
+				if (a == 1) {
+					Japanese1 = b;
+				}
+				if (a == 2) {
+					Japanese2 = b;
+				}
+				if (a == 3) {
+					Japanese3 = b;
+				}
+				if (a == 4) {
+					Japanese4 = b;
+				}
+
 				tekiflag = 0;
 			} else if (tekiflag == 2)//もうすでにいるところに敵を出そうとしたら、出さない。
 				tekiflag = 0;
@@ -336,7 +391,7 @@ public class PlayingState implements State {
 		} else
 			g.drawImage(monwaku, 360, 554, model.getView());
 
-		g.setFont(new Font(Font.SERIF, Font.TYPE1_FONT, 40));
+		g.setFont(new Font(Font.DIALOG, Font.BOLD, 35));
 		g.setColor(color);
 		//スコア,time
 		//  g.drawString( "Score"+model.score, 430, 580);
@@ -352,24 +407,59 @@ public class PlayingState implements State {
 				case 1:
 					g.drawImage(teki.getImage(), 150 + teki.getTekiidou(), 60 + teki.getTekiidou(), model.getView());
 					g.drawImage(answer, 10, 10, model.getView());
-					g.drawString(teki.getQuestion(), 53, 64);
+					g.drawString(Question.soraText.get(Japanese1), 53, 60);
+					g.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
+					g.drawString(teki.getQuestion(), 93, 85);
 
+					g.setColor(Color.RED);
+					System.out.println(countRed[teki.getDirection()]);
+					g.drawString((teki.getQuestion()).substring(0, countRed[teki.getDirection()]), 93, 85);
+					g.setColor(color);
+
+					g.setFont(new Font(Font.DIALOG, Font.BOLD, 35));
 					break;
 				case 2:
 					g.drawImage(teki.getImage(), 800 - teki.getTekiidou(), 60 + teki.getTekiidou(), model.getView());
-					g.drawImage(answer, 790, 10, model.getView());
-					g.drawString(teki.getQuestion(), 840, 64);
+					g.drawImage(answer, 755, 10, model.getView());
+					g.drawString(Question.soraText.get(Japanese2), 800, 60);
+					g.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
+					g.drawString(teki.getQuestion(), 840, 85);
+
+					g.setColor(Color.RED);
+					System.out.println(countRed[teki.getDirection()]);
+					g.drawString((teki.getQuestion()).substring(0, countRed[teki.getDirection()]), 840, 85);
+					g.setColor(color);
+
+					g.setFont(new Font(Font.DIALOG, Font.BOLD, 35));
 
 					break;
 				case 3:
 					g.drawImage(teki.getImage(), 100 + teki.getTekiidou(), 540 - teki.getTekiidou(), model.getView());
-					g.drawImage(answer, 10, 680, model.getView());
-					g.drawString(teki.getQuestion(), 70, 734);
+					g.drawImage(answer, 10, 650, model.getView());
+					g.drawString(Question.rikuText.get(Japanese3), 53, 704);
+					g.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
+					g.drawString(teki.getQuestion(), 93, 728);
+
+					g.setColor(Color.RED);
+					System.out.println(countRed[teki.getDirection()]);
+					g.drawString((teki.getQuestion()).substring(0, countRed[teki.getDirection()]), 93, 728);
+					g.setColor(color);
+
+					g.setFont(new Font(Font.DIALOG, Font.BOLD, 35));
 					break;
 				case 4:
 					g.drawImage(teki.getImage(), 800 - teki.getTekiidou(), 540 - teki.getTekiidou(), model.getView());
-					g.drawImage(answer, 790, 680, model.getView());
-					g.drawString(teki.getQuestion(), 860, 734);
+					g.drawImage(answer, 755, 650, model.getView());
+					g.drawString(Question.rikuText.get(Japanese4), 810, 704);
+					g.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
+					g.drawString(teki.getQuestion(), 870, 728);
+
+					g.setColor(Color.RED);
+					System.out.println(countRed[teki.getDirection()]);
+					g.drawString((teki.getQuestion()).substring(0, countRed[teki.getDirection()]), 870, 728);
+					g.setColor(color);
+
+					g.setFont(new Font(Font.DIALOG, Font.BOLD, 35));
 					break;
 				default:
 					break;
@@ -432,4 +522,14 @@ public class PlayingState implements State {
 			return this;
 	}
 
+	String okikae(String a) {
+
+		String okikaeAto = a.replace("nn", "n");
+		okikaeAto = okikaeAto.replace("si", "shi");
+		okikaeAto = okikaeAto.replace("ci", "ti");
+		//}
+		//	}
+		//		}
+		return okikaeAto;
+	}
 }
